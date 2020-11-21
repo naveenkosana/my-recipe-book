@@ -1,0 +1,12 @@
+<mat-grid-list [cols]="4" rowHeight="2:1" (window:resize)="onResize($event)">
+    <mat-grid-tile *ngFor="let recipe of recipeList">
+        <div class="mat-recipe-tile" (click)="openRecipe(recipe)">
+            {{recipe.name}}
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+    <div class="mat-recipe-tile" (click)="addRecipe()">
+        Add Recipe
+    </div>
+    </mat-grid-tile>
+  </mat-grid-list>

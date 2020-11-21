@@ -1,0 +1,31 @@
+.home-body{
+    height: 100vh;
+}
+
+.scroll-down {
+    position: fixed;
+    margin: auto;
+    bottom: 1.25rem;
+    left:0;
+    right:0;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.scroll-down img{
+    cursor: pointer;
+    animation: shake 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    0%, 100% {transform: translateX(0);} 
+    10%, 30%, 50%, 70%, 90% {transform: translateX(-10px);} 
+    20%, 40%, 60%, 80% {transform: translateX(10px);} 
+}
+
+.view-recipe-content{
+    height: 100vh;
+}
