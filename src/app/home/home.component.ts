@@ -15,11 +15,18 @@ export class HomeComponent implements OnInit {
     this.scrollButtonEnable = true;
   }
 
+  /*
+    Scroll function - To detect Scroll button click on home page and move to next section
+  */
   scroll(el: HTMLElement) {
     this.scrollButtonEnable = false;
     el.scrollIntoView({behavior:"smooth"});
   }
+
+  /*
+    createRecipe function - Triggers dialog box to add a new recipe
+  */
   createRecipe(){
-    
+
   }
 }

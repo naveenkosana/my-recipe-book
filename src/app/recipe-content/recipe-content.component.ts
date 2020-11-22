@@ -2,6 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RecipeDialogComponent } from '../recipe-dialog/recipe-dialog.component';
 
+export interface Recipe {
+  id: number;
+  name: string;
+  cuisine: string;
+  numberOfServings:number;
+  imgSrc: string;
+  cookingTime: number;
+  ingredients:string[];
+  preparationSteps:string;
+}
 @Component({
   selector: 'app-recipe-content',
   templateUrl: './recipe-content.component.html',
@@ -9,12 +19,13 @@ import { RecipeDialogComponent } from '../recipe-dialog/recipe-dialog.component'
 })
 
 
+
 export class RecipeContentComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
-  recipeList :any[];
+  recipeList :Recipe[];
   recipeCuisines: any[];
-  newRecipe: any = {
+  newRecipe: Recipe = {
       id:-99,
       name:'',
       cuisine: '',
@@ -85,26 +96,99 @@ export class RecipeContentComponent implements OnInit {
         cookingTime:40,
         ingredients:[],
         preparationSteps:'1. Make Batter\n2. Take Pan'
+    },
+    {
+        id:7,
+        name:'Pasta',
+        cuisine: 'Italian',
+        numberOfServings: 2,
+        imgSrc:'../../assets/pasta.jpg',
+        cookingTime:20,
+        ingredients:[],
+        preparationSteps:'1. Boil Pasta\n2. Take Pan'
+    },
+    {
+        id:8,
+        name:'Gelato',
+        cuisine: 'Italian',
+        numberOfServings: 7,
+        imgSrc:'../../assets/gelato.jpg',
+        cookingTime:80,
+        ingredients:[],
+        preparationSteps:'1. Take Milk\n2. Take Bowl'
+    },
+    {
+        id:9,
+        name:'Mousse au chocolat',
+        cuisine: 'French',
+        numberOfServings: 4,
+        imgSrc:'../../assets/mousse.jpg',
+        cookingTime:90,
+        ingredients:[],
+        preparationSteps:'1. Take Milk\n2. Take Bowl'
+    },
+    {
+        id:10,
+        name:'Idly',
+        cuisine: 'Indian',
+        numberOfServings: 4,
+        imgSrc:'../../assets/idly.jpg',
+        cookingTime:50,
+        ingredients:[],
+        preparationSteps:'1. Make Batter\n2. Take Pan'
+    },
+    {
+        id:11,
+        name:'Kibbeling',
+        cuisine: 'Dutch',
+        numberOfServings: 4,
+        imgSrc:'../../assets/kibbeling.jpg',
+        cookingTime:40,
+        ingredients:[],
+        preparationSteps:'1. Make Batter\n2. Take Pan'
+    },
+    {
+        id:12,
+        name:'Quesadilla',
+        cuisine: 'Mexican',
+        numberOfServings: 2,
+        imgSrc:'../../assets/quesadilla.jpg',
+        cookingTime:40,
+        ingredients:[],
+        preparationSteps:'1. Make Batter\n2. Take Pan'
     }];
 
-    this.recipeCuisines = [...new Set(this.recipeList.map(recipe => recipe.cuisine))];
+    this.recipeCuisines = [...new Set(this.recipeList.map(recipe => recipe.cuisine))]; //store all the cuisine values in an array
   }
 
+  /*
+  Function to adjust the no of recipes to show based on window size (Under Progress)
+  */
   onResize(event){
 
   }
 
+  /*
+  Function to open a dialog to view/edit recipe (Under Progress)
+  */
   openRecipe(recipe){
     this.dialog.open(RecipeDialogComponent, {
       data:recipe
     });
   }
+
+  /*
+  Function to open a dialog to create a new recipe (Under Progress)
+  */
   addRecipe(){
     this.dialog.open(RecipeDialogComponent, {
       data:this.newRecipe
     });
   }
 
+  /*
+  Function to return an array of recipes based on the cuisine
+  */
   getRecipesByCuisine(cuisine){
     return this.recipeList.filter(recipe => recipe.cuisine == cuisine);
   }
