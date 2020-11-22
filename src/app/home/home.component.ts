@@ -9,13 +9,17 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
+  scrollButtonEnable: boolean;
+
   ngOnInit(): void {
+    this.scrollButtonEnable = true;
   }
 
   scroll(el: HTMLElement) {
+    this.scrollButtonEnable = false;
     el.scrollIntoView({behavior:"smooth"});
   }
   createRecipe(){
-
+    
   }
 }

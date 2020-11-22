@@ -13,10 +13,11 @@ export class RecipeContentComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
   recipeList :any[];
+  recipeCuisines: any[];
   newRecipe: any = {
       id:-99,
       name:'',
-      type: '',
+      cuisine: '',
       numberOfServings:1 ,
       imgSrc:'',
       cookingTime:60,
@@ -28,9 +29,9 @@ export class RecipeContentComponent implements OnInit {
     this.recipeList = [{
       id:1,
       name:'Margherita Pizza',
-      type: 'Italian',
+      cuisine: 'Italian',
       numberOfServings: 4,
-      imgSrc:'',
+      imgSrc:'../../assets/margherita-pizza.jpg',
       cookingTime:60,
       ingredients:[],
       preparationSteps:'1. Make dough\n2. Make round'
@@ -38,9 +39,9 @@ export class RecipeContentComponent implements OnInit {
     {
         id:2,
         name:'Crepe',
-        type: 'French',
+        cuisine: 'French',
         numberOfServings: 4,
-        imgSrc:'',
+        imgSrc:'../../assets/French-Crepes.jpg',
         cookingTime:40,
         ingredients:[],
         preparationSteps:'1. Make Batter\n2. Take Pan'
@@ -48,9 +49,9 @@ export class RecipeContentComponent implements OnInit {
     {
         id:3,
         name:'Stroopwafel',
-        type: 'Dutch',
+        cuisine: 'Dutch',
         numberOfServings: 4,
-        imgSrc:'',
+        imgSrc:'../../assets/stroopwafels.jpg',
         cookingTime:50,
         ingredients:[],
         preparationSteps:'1. Make Batter\n2. Take Pan'
@@ -58,19 +59,19 @@ export class RecipeContentComponent implements OnInit {
     {
         id:4,
         name:'Goulash',
-        type: 'Hungarian',
+        cuisine: 'Hungarian',
         numberOfServings: 4,
-        imgSrc:'',
+        imgSrc:'../../assets/Hungarian_Goulash.jpg',
         cookingTime:40,
         ingredients:[],
         preparationSteps:'1. Make Batter\n2. Take Pan'
     },
     {
         id:5,
-        name:'Chicken Biriyani',
-        type: 'Indian',
+        name:'Chicken Biryani',
+        cuisine: 'Indian',
         numberOfServings: 4,
-        imgSrc:'',
+        imgSrc:'../../assets/Chicken-Biryani.jpg',
         cookingTime:80,
         ingredients:[],
         preparationSteps:'1. Take Chicken\n2. Take Pan'
@@ -78,13 +79,15 @@ export class RecipeContentComponent implements OnInit {
     {
         id:6,
         name:'Burrito',
-        type: 'Mexican',
+        cuisine: 'Mexican',
         numberOfServings: 4,
-        imgSrc:'',
+        imgSrc:'../../assets/burrito.jpg',
         cookingTime:40,
         ingredients:[],
         preparationSteps:'1. Make Batter\n2. Take Pan'
-    }]
+    }];
+
+    this.recipeCuisines = [...new Set(this.recipeList.map(recipe => recipe.cuisine))];
   }
 
   onResize(event){
@@ -100,6 +103,10 @@ export class RecipeContentComponent implements OnInit {
     this.dialog.open(RecipeDialogComponent, {
       data:this.newRecipe
     });
+  }
+
+  getRecipesByCuisine(cuisine){
+    return this.recipeList.filter(recipe => recipe.cuisine == cuisine);
   }
 
 }

@@ -1,14 +1,10 @@
 <!-- <app-navigation></app-navigation> -->
 <div class="home-body">
-    <mat-form-field appearance="outline">
-        <mat-label>Search Recipes</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
+    
     <button mat-raised-button color="primary">Create Recipe</button>
 
 
-<div class="scroll-down">
+<div class="scroll-down" *ngIf="scrollButtonEnable">
     <img src="./../../assets/pizza-slice.png" alt="Scroll Down" (click)="scroll(viewRecipes)" height="50px" width="50px" />
 </div>
 </div>

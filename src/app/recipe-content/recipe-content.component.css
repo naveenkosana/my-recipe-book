@@ -1,6 +1,61 @@
-.mat-recipe-tile{
-    width:80%;
-    height: 80%;
-    border:2px solid black;
-    cursor: pointer;
+.mat-grid-recipe-tile{
+    overflow:visible !important;
 }
+
+.mat-recipe-tile {
+    text-align:center;
+    width:75%;
+    height: 100%;
+    /* border:2px solid rgb(126, 105, 105); */
+    background-color: white;
+    cursor: pointer;
+    border-radius:3%;
+}
+
+/* .tile-recipe-details{
+    display: flex;
+} */
+
+.recipe-details-container{
+    padding:0px;
+    margin-top:2% !important;
+    list-style-type: none;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.mat-time-icon{
+    font-size:14px;
+}
+.tile-recipe-img img{
+    width: 100%;
+    height: auto;
+    border-radius:3%;
+}
+
+.tile-recipe-img{
+    text-align: center;
+    width: 100%;
+    height: auto;
+    border-radius:3%;
+    /* overflow: hidden; */
+}
+
+.shadow-custom {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .shadow-custom:hover {
+    box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .recipes{
+      margin-left:5%;
+      margin-right: 5%;
+  }
+
+  .recipe-cuisine{
+      margin-top:2%;
+  }
