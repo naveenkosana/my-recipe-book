@@ -1,17 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { RecipeDialogComponent } from '../recipe-dialog/recipe-dialog.component';
+import { RecipeDetailComponent } from '../recipe-detail/recipe-detail.component';
+import { Recipe } from '../recipe';
+import { RecipeListService } from '../recipe-list.service';
 
-export interface Recipe {
-  id: number;
-  name: string;
-  cuisine: string;
-  numberOfServings:number;
-  imgSrc: string;
-  cookingTime: number;
-  ingredients:string[];
-  preparationSteps:string;
-}
+
 @Component({
   selector: 'app-recipe-content',
   templateUrl: './recipe-content.component.html',
@@ -20,145 +14,36 @@ export interface Recipe {
 
 
 
-export class RecipeContentComponent implements OnInit {
+export class RecipeContentComponent implements OnInit, OnDestroy {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,
+    private _recipeListService: RecipeListService) { }
+
   recipeList :Recipe[];
   recipeCuisines: any[];
   newRecipe: Recipe = {
       id:-99,
       name:'',
       cuisine: '',
-      numberOfServings:1 ,
+      numberOfServings:0,
       imgSrc:'',
-      cookingTime:60,
+      cookingTime:0,
       ingredients:[],
       preparationSteps:''
   };
+  private recipeSubscription = [];
+  selectedRecipe: Recipe = this.newRecipe;
 
   ngOnInit(): void {
-    this.recipeList = [{
-      id:1,
-      name:'Margherita Pizza',
-      cuisine: 'Italian',
-      numberOfServings: 4,
-      imgSrc:'../../assets/margherita-pizza.jpg',
-      cookingTime:60,
-      ingredients:[],
-      preparationSteps:'1. Make dough\n2. Make round'
-    },
-    {
-        id:2,
-        name:'Crepe',
-        cuisine: 'French',
-        numberOfServings: 4,
-        imgSrc:'../../assets/French-Crepes.jpg',
-        cookingTime:40,
-        ingredients:[],
-        preparationSteps:'1. Make Batter\n2. Take Pan'
-    },
-    {
-        id:3,
-        name:'Stroopwafel',
-        cuisine: 'Dutch',
-        numberOfServings: 4,
-        imgSrc:'../../assets/stroopwafels.jpg',
-        cookingTime:50,
-        ingredients:[],
-        preparationSteps:'1. Make Batter\n2. Take Pan'
-    },
-    {
-        id:4,
-        name:'Goulash',
-        cuisine: 'Hungarian',
-        numberOfServings: 4,
-        imgSrc:'../../assets/Hungarian_Goulash.jpg',
-        cookingTime:40,
-        ingredients:[],
-        preparationSteps:'1. Make Batter\n2. Take Pan'
-    },
-    {
-        id:5,
-        name:'Chicken Biryani',
-        cuisine: 'Indian',
-        numberOfServings: 4,
-        imgSrc:'../../assets/Chicken-Biryani.jpg',
-        cookingTime:80,
-        ingredients:[],
-        preparationSteps:'1. Take Chicken\n2. Take Pan'
-    },
-    {
-        id:6,
-        name:'Burrito',
-        cuisine: 'Mexican',
-        numberOfServings: 4,
-        imgSrc:'../../assets/burrito.jpg',
-        cookingTime:40,
-        ingredients:[],
-        preparationSteps:'1. Make Batter\n2. Take Pan'
-    },
-    {
-        id:7,
-        name:'Pasta',
-        cuisine: 'Italian',
-        numberOfServings: 2,
-        imgSrc:'../../assets/pasta.jpg',
-        cookingTime:20,
-        ingredients:[],
-        preparationSteps:'1. Boil Pasta\n2. Take Pan'
-    },
-    {
-        id:8,
-        name:'Gelato',
-        cuisine: 'Italian',
-        numberOfServings: 7,
-        imgSrc:'../../assets/gelato.jpg',
-        cookingTime:80,
-        ingredients:[],
-        preparationSteps:'1. Take Milk\n2. Take Bowl'
-    },
-    {
-        id:9,
-        name:'Mousse au chocolat',
-        cuisine: 'French',
-        numberOfServings: 4,
-        imgSrc:'../../assets/mousse.jpg',
-        cookingTime:90,
-        ingredients:[],
-        preparationSteps:'1. Take Milk\n2. Take Bowl'
-    },
-    {
-        id:10,
-        name:'Idly',
-        cuisine: 'Indian',
-        numberOfServings: 4,
-        imgSrc:'../../assets/idly.jpg',
-        cookingTime:50,
-        ingredients:[],
-        preparationSteps:'1. Make Batter\n2. Take Pan'
-    },
-    {
-        id:11,
-        name:'Kibbeling',
-        cuisine: 'Dutch',
-        numberOfServings: 4,
-        imgSrc:'../../assets/kibbeling.jpg',
-        cookingTime:40,
-        ingredients:[],
-        preparationSteps:'1. Make Batter\n2. Take Pan'
-    },
-    {
-        id:12,
-        name:'Quesadilla',
-        cuisine: 'Mexican',
-        numberOfServings: 2,
-        imgSrc:'../../assets/quesadilla.jpg',
-        cookingTime:40,
-        ingredients:[],
-        preparationSteps:'1. Make Batter\n2. Take Pan'
-    }];
+    this.recipeSubscription.push(this._recipeListService.getRecipesList().subscribe(
+      data => {
+        this.recipeList = data;
+        // console.log(JSON.stringify(this.recipeList));
+        this.recipeCuisines = [...new Set(this.recipeList.map(recipe => recipe.cuisine))]; //store all the cuisine values in an array
+      }
+    ));
 
-    this.recipeCuisines = [...new Set(this.recipeList.map(recipe => recipe.cuisine))]; //store all the cuisine values in an array
+    
   }
 
   /*
@@ -169,21 +54,21 @@ export class RecipeContentComponent implements OnInit {
   }
 
   /*
-  Function to open a dialog to view/edit recipe (Under Progress)
+  Function to open a side bar to view/edit recipe
   */
-  openRecipe(recipe){
-    this.dialog.open(RecipeDialogComponent, {
-      data:recipe
-    });
+  openRecipe(recipe: Recipe){
+    // this.dialog.open(RecipeDetailComponent, {
+    //   data:recipe
+    // });
+    this.selectedRecipe = recipe;
+    console.log(JSON.stringify(this.selectedRecipe));
   }
 
   /*
   Function to open a dialog to create a new recipe (Under Progress)
   */
-  addRecipe(){
-    this.dialog.open(RecipeDialogComponent, {
-      data:this.newRecipe
-    });
+  openNewRecipe(){
+    this.selectedRecipe = this.newRecipe;
   }
 
   /*
@@ -193,4 +78,22 @@ export class RecipeContentComponent implements OnInit {
     return this.recipeList.filter(recipe => recipe.cuisine == cuisine);
   }
 
+/*
+  Function to add or update a recipe to the existing list
+  */
+  addOrUpdateRecipe(updatedRecipe: Recipe){
+    if(updatedRecipe.id == -99){
+      this.recipeList.sort((a,b) => a.id - b.id);
+      updatedRecipe.id = this.recipeList[this.recipeList.length-1].id + 1; //Give the id for new recipe with the largest id + 1 in the recipe list 
+      this.recipeList.push(updatedRecipe);
+    }
+    else{
+      this.recipeList[this.recipeList.indexOf(this.recipeList.find(item => item.id == updatedRecipe.id))] = updatedRecipe;
+    }
+    console.log(JSON.stringify(this.recipeList));
+  }
+
+  ngOnDestroy():void {
+    this.recipeSubscription.forEach(sub => sub.unsubscribe());
+  }
 }

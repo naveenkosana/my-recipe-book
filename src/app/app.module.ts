@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { RecipeContentComponent } from './recipe-content/recipe-content.component';
-import { RecipeDialogComponent } from './recipe-dialog/recipe-dialog.component';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -21,12 +23,15 @@ import {MatDialogModule} from '@angular/material/dialog';
     AppComponent,
     HomeComponent,
     RecipeContentComponent,
-    RecipeDialogComponent
+    RecipeDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,

@@ -1,0 +1,65 @@
+<button mat-raised-button color="primary" type="button" (click)="editRecipe()">Edit Recipe</button>
+
+<div class="recipe-detail-normal" *ngIf="!isEditMode">
+  <div class="recipe-field">
+    <span class="recipe-label">Recipe Name: </span>
+    <span class="recipe-label-value">{{selectedRecipe.name}}</span>
+  </div>
+  <div class="recipe-field">
+    <span class="recipe-label">Cuisine: </span>
+    <span class="recipe-label-value">{{selectedRecipe.cuisine}}</span>
+  </div>
+  <div class="recipe-field">
+    <span class="recipe-label">Number of servings: </span>
+    <span class="recipe-label-value">{{selectedRecipe.numberOfServings}}</span>
+  </div>
+  <div class="recipe-field">
+    <span class="recipe-label">Cooking Time: </span>
+    <span class="recipe-label-value">{{selectedRecipe.cookingTime}}</span>
+  </div>
+  <div class="recipe-field">
+    <span class="recipe-label">Preparation Steps: </span>
+    <span class="recipe-label-value">{{selectedRecipe.preparationSteps}}</span>
+  </div>
+</div>
+
+
+<div class="recipe-detail-form" *ngIf="isEditMode">
+  <div class="form-container">
+    <form [formGroup]="recipeForm" (submit)="saveRecipe(recipeForm.value)">
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Recipe Name</mat-label>
+        <input matInput  formControlName="name">
+        <!-- <mat-error *ngIf="recipeForm.controls.recipeName.touched">
+          <span *ngIf="recipeForm.controls.recipeName.errors.required">This field is mandatory.</span>
+        </mat-error> -->
+      </mat-form-field><br>
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Cuisine</mat-label>
+        <input matInput  formControlName="cuisine">
+        <!-- <mat-error *ngIf="recipeForm.controls.cuisine.touched">
+          <span *ngIf="recipeForm.controls.cuisine.errors.required">This field is mandatory.</span>
+        </mat-error> -->
+      </mat-form-field><br>
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Number of Servings</mat-label>
+        <input matInput  formControlName="numberOfServings">
+        <!-- <mat-error *ngIf="recipeForm.controls.numberOfServings.touched">
+          <span *ngIf="recipeForm.controls.numberOfServings.errors.required">This field is mandatory.</span>
+        </mat-error> -->
+      </mat-form-field><br>
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Cooking Time</mat-label>
+        <input matInput  formControlName="cookingTime">
+        <!-- <mat-error *ngIf="recipeForm.controls.cookingTime.touched">
+          <span *ngIf="recipeForm.controls.cookingTime.errors.required">This field is mandatory.</span>
+        </mat-error> -->
+      </mat-form-field><br>
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Preparation Steps</mat-label>
+        <textarea matInput formControlName="preparationSteps"></textarea>
+      </mat-form-field><br>
+      <button mat-raised-button color="primary" type="submit">Save Recipe</button>
+    </form>
+  </div>
+</div>

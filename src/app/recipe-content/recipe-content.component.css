@@ -1,7 +1,7 @@
 /*** CSS for Recipes view - start ***/
 .recipes{
-    margin-left:5%;
-    margin-right: 5%;
+    /* padding-left:5%; */
+    /* margin-right: 5%; */
 }
 
 .mat-grid-recipe-tile{
@@ -60,3 +60,24 @@
   }
 
   /*** CSS for Recipes view - end ***/
+
+  /*** CSS for Recipes Sidenav - start***/
+  .recipe-sidenav {
+    width:40%;
+  }
+
+  .recipe-container{
+      /* position: absolute; */
+      background-color: inherit;
+      top:0;
+      bottom:0;
+      left:0;
+      right:0;
+  }
+
+  .recipe-sidenav-content{
+    overflow: hidden !important;
+    margin-left:5%;
+  }
+
+    /*** CSS for Recipes Sidenav - end***/
