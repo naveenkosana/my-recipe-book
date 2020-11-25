@@ -1,0 +1,30 @@
+.recipe-detail-normal{
+    
+}
+
+.recipe-detail-form {
+    display: flex;
+    justify-content:center;
+}
+
+.recipe-detail-form .form-field {
+    width:25vw;
+    font-size:1.2vw;
+}
+
+.recipe-detail-normal .recipe-field h1 {
+    font-size:2.5vw;
+}
+
+.recipe-detail-normal .recipe-field .recipe-label {
+    font-weight: bold;
+    font-size:1.5vw;
+}
+
+.recipe-detail-normal .recipe-field .recipe-label-value {
+    font-size: 1.5vw;
+}
+
+.recipe-ingredients {
+    font-size: 1.5vw;
+}

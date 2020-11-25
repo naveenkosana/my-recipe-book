@@ -2,13 +2,27 @@
 
 .home-body{
     height: 100vh;
+    background-image: url('../../assets/bg-1920.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media only screen and (max-width: 1400px) {
+    .home-body{
+        background-image: url('../../assets/bg-1400.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 }
 
 .home-title{
     font-family: 'Cookie', cursive;
-    font-size:160px;
-    transform: rotate(-30deg);
-    margin-top:10%;
+    font-size: 12vw;
+    /* transform: rotate(-16deg); */
+    position: absolute;
+    color: darkslategray;
+    top: 40%;
+    left: 13%;
 }
 
 /*** Styles for Home page Title - End ***/
@@ -44,3 +58,124 @@
 .view-recipe-content{
     height: 100vh;
 }
+
+/*** Styles for Cup Animation - Start ***/
+
+#wrap {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+}
+.steam {
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background-color: #7c3e04;
+    margin-top: -75px;
+    margin-left: 75px;
+    z-index: 0;
+    opacity: 0;
+  }
+  
+  #steam-one {
+    -webkit-animation: steam-one 4s ease-out infinite;
+    animation: steam-one 4s ease-out infinite;
+  }
+  
+  #steam-three {
+    -webkit-animation: steam-one 4s ease-out 1s infinite;
+    animation: steam-one 4s ease-out 1s infinite;
+  }
+  
+  @-webkit-keyframes steam-one {
+    0% {transform: translateY(0) translateX(0) scale(0.25); opacity: 0.2;}
+    100% {transform: translateY(-200px) translateX(-20px) scale(1); opacity: 0;}
+  }
+  
+  @keyframes steam-one {
+    0% {transform: translateY(0) translateX(0) scale(0.25); opacity: 0.2;}
+    100% {transform: translateY(-200px) translateX(-20px) scale(1); opacity: 0;}
+  }
+  
+  #steam-two {
+    -webkit-animation: steam-two 4s ease-out 0.5s infinite;
+    animation: steam-two 4s ease-out 0.5s infinite;
+  }
+  
+  #steam-four {
+    -webkit-animation: steam-two 4s ease-out 1.5s infinite;
+    animation: steam-two 4s ease-out 1.5s infinite;
+  }
+  
+  @-webkit-keyframes steam-two {
+    0% {transform: translateY(0) translateX(0) scale(0.25); opacity: 0.2;}
+    100% {transform: translateY(-200px) translateX(20px) scale(1); opacity: 0;}
+  }
+  
+  @keyframes steam-two {
+    0% {transform: translateY(0) translateX(0) scale(0.25); opacity: 0.2;}
+    100% {transform: translateY(-200px) translateX(20px) scale(1); opacity: 0;}
+  }
+  
+  #cup {
+    z-index: 1;
+  }
+  
+  #cup-body {
+    position: absolute;
+    height: 200px;
+    width: 300px;
+    border-radius: 0 0 150px 150px;
+    background-color: #78dbe8;
+    margin: auto;
+    display: inline-block;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  #cup-shade {
+    position: relative;
+    height: 300px;
+    width: 200px;
+    background-color: #26aebf;
+    display: inline-block;
+    margin-left: 42%;
+    margin-top: -3px;
+    transform: rotate(50deg);
+    z-index: 1;
+  }
+  
+  #cup-handle {
+    position: relative;
+    height: 75px;
+    width: 80px;
+    border-radius: 0 150px 150px 0;
+    border: 15px solid #26aebf;
+    margin-bottom: 95px;
+    margin-left: 250px;
+    display: inline-block;
+    z-index: 0;
+  }
+  
+  #saucer {
+    position: absolute;
+    height: 30px;
+    width: 300px;  
+    border-radius: 0 0 100px 100px;
+    background-color: #78dbe8;
+    margin-top: -32px;
+    margin-left: 5px;
+    z-index: 2;
+  }
+  
+  #shadow {
+    height: 10px;
+    width: 300px;
+    border-radius: 50%;
+    margin-top: -5px;
+    margin-left: 6px;
+    background-color: #DC696F;
+  }
+
+/*** Styles for Cup Animation - End ***/

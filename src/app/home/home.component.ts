@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   scrollButtonEnable: boolean;
+  title: string = 'Recipe Book';
 
   ngOnInit(): void {
     this.scrollButtonEnable = true;

@@ -1,10 +1,9 @@
 <button mat-raised-button color="primary" type="button" (click)="editRecipe()">Edit Recipe</button>
-
+<br>
 <div class="recipe-detail-normal" *ngIf="!isEditMode">
   <div class="recipe-field">
-    <span class="recipe-label">Recipe Name: </span>
-    <span class="recipe-label-value">{{selectedRecipe.name}}</span>
-  </div>
+    <h1>{{selectedRecipe.name}}</h1>
+  </div><br>
   <div class="recipe-field">
     <span class="recipe-label">Cuisine: </span>
     <span class="recipe-label-value">{{selectedRecipe.cuisine}}</span>
@@ -15,12 +14,24 @@
   </div>
   <div class="recipe-field">
     <span class="recipe-label">Cooking Time: </span>
-    <span class="recipe-label-value">{{selectedRecipe.cookingTime}}</span>
+    <span class="recipe-label-value">{{selectedRecipe.cookingTime}}min</span>
   </div>
+  <!-- <div class="recipe-field">
+    <span class="recipe-label">Ingredients: </span>
+    <div class="recipe-ingredients">
+      <ul>
+        <li *ngFor="let ingredient of selectedRecipe.ingredients">{{ingredient}}</li>
+      </ul>
+    </div>
+  </div> -->
   <div class="recipe-field">
-    <span class="recipe-label">Preparation Steps: </span>
+    <span class="recipe-label">Ingredients: </span><br>
+    <span class="recipe-label-value">{{selectedRecipe.ingredients}}</span>
+  </div><br>
+  <div class="recipe-field">
+    <span class="recipe-label">Preparation Steps: </span><br>
     <span class="recipe-label-value">{{selectedRecipe.preparationSteps}}</span>
-  </div>
+  </div><br>
 </div>
 
 
@@ -56,8 +67,12 @@
         </mat-error> -->
       </mat-form-field><br>
       <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Ingredients</mat-label>
+        <textarea matInput rows="3" formControlName="ingredients"></textarea>
+      </mat-form-field><br>
+      <mat-form-field class="form-field" appearance="standard">
         <mat-label>Preparation Steps</mat-label>
-        <textarea matInput formControlName="preparationSteps"></textarea>
+        <textarea matInput rows="3" formControlName="preparationSteps"></textarea>
       </mat-form-field><br>
       <button mat-raised-button color="primary" type="submit">Save Recipe</button>
     </form>

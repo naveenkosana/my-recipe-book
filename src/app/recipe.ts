@@ -5,6 +5,6 @@ export interface Recipe {
     numberOfServings:number;
     imgSrc: string;
     cookingTime: number;
-    ingredients:string[];
+    ingredients:string;
     preparationSteps:string;
   }

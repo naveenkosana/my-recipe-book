@@ -2,8 +2,24 @@
 <div class="home-body">
     
     <!-- <button mat-raised-button color="primary">Create Recipe</button> -->
-    <h1 class="home-title">Recipe Book</h1>
-
+    <h1 class="home-title">{{title}}</h1>
+    <div id="wrap">
+        <div class="steam" id="steam-one"></div>
+        <div class="steam" id="steam-two"></div>
+        <div class="steam" id="steam-three"></div>
+        <div class="steam" id="steam-four"></div>
+        
+        <div id="cup">
+          <div id="cup-body">
+          <div id="cup-shade"></div>
+          </div>
+          <div id="cup-handle"></div>
+        </div>
+        
+        <div id="saucer"></div>
+        
+        <div id="shadow"></div>
+      </div>
 <div class="scroll-down" *ngIf="scrollButtonEnable">
     <img src="./../../assets/pizza-slice.png" alt="Scroll Down" (click)="scroll(viewRecipes)" height="50px" width="50px" />
 </div>

@@ -28,7 +28,7 @@ export class RecipeContentComponent implements OnInit, OnDestroy {
       numberOfServings:0,
       imgSrc:'',
       cookingTime:0,
-      ingredients:[],
+      ingredients:'',
       preparationSteps:''
   };
   private recipeSubscription = [];
@@ -40,6 +40,9 @@ export class RecipeContentComponent implements OnInit, OnDestroy {
         this.recipeList = data;
         // console.log(JSON.stringify(this.recipeList));
         this.recipeCuisines = [...new Set(this.recipeList.map(recipe => recipe.cuisine))]; //store all the cuisine values in an array
+      },
+      error => {
+        console.log(error);
       }
     ));
 

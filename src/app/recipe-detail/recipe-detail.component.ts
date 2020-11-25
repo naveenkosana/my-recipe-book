@@ -21,10 +21,10 @@ export class RecipeDetailComponent implements OnInit, OnChanges {
   isNewRecipe: boolean = false;
 
   ngOnInit(): void {
-    if(this.selectedRecipe.id==-99){
-      this.isEditMode = true;
-    }
-    this.buildRecipeForm();
+    // if(this.selectedRecipe.id==-99){
+    //   this.isEditMode = true;
+    // }
+    // this.buildRecipeForm();
   }
 
   /*
@@ -36,16 +36,18 @@ export class RecipeDetailComponent implements OnInit, OnChanges {
       cuisine:[this.selectedRecipe.cuisine,[Validators.required]],
       numberOfServings:[this.selectedRecipe.numberOfServings,[Validators.required]],
       cookingTime:[this.selectedRecipe.cookingTime,[Validators.required]],
-      // ingredients:[this.selectedRecipe.ingredients],
+      ingredients:[this.selectedRecipe.ingredients],
       preparationSteps:[this.selectedRecipe.preparationSteps]
     });
   }
 
   ngOnChanges(): void {
+    this.isEditMode = false;
     if(this.selectedRecipe.id==-99){
       this.isEditMode = true;
     }
     this.buildRecipeForm();
+    console.log(this.isEditMode);
   }
 
   /*
@@ -66,7 +68,7 @@ export class RecipeDetailComponent implements OnInit, OnChanges {
       numberOfServings: updatedRecipe.numberOfServings,
       imgSrc: this.selectedRecipe.imgSrc,
       cookingTime: updatedRecipe.cookingTime,
-      ingredients: this.selectedRecipe.ingredients,
+      ingredients: updatedRecipe.ingredients,
       preparationSteps: updatedRecipe.preparationSteps
     }
     this.selectedRecipe = this.updatedRecipe;
