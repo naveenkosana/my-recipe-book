@@ -8,33 +8,98 @@
                 <div class="recipe-filter">
                     <mat-form-field appearance="outline">
                         <mat-label>Search Recipes</mat-label>
-                        <input matInput placeholder="Placeholder">
+                        <input matInput [(ngModel)]="searchText" placeholder="Search for a recipe">
                         <mat-icon matSuffix>search</mat-icon>
                     </mat-form-field>
                     <button mat-raised-button color="primary" (click)="openNewRecipe();snav.toggle();">Add a new Recipe</button>
                 </div>
         
             </div>
-            <div class="recipe-cuisine" *ngFor="let cuisine of recipeCuisines">
-                <h2>{{cuisine}}</h2>
-                <mat-grid-list [cols]=5 rowHeight="1:1" (window:resize)="onResize($event)">
-                    <mat-grid-tile class="mat-grid-recipe-tile" *ngFor="let recipe of getRecipesByCuisine(cuisine)">
+            <div class="all-recipes">
+                <h2>All Recipes</h2>
+                <owl-carousel-o [options]="customOptions">
+                    <ng-template carouselSlide class="owl-recipe-item" *ngFor="let recipe of recipeList | filter:searchText">
                         <div class="mat-recipe-tile shadow-custom" (click)="openRecipe(recipe);snav.toggle();">
                             <div class="tile-recipe-img">
                                 <img [src]=recipe.imgSrc>
                             </div>
-                            <div class="tile-recipe-name">
+                            <div class="tile-recipe-details-container">
+                                <div class="tile-recipe-name">
+                                    {{recipe.name}}
+                                </div>
+                                <div class="tile-recipe-details">
+                                    <ul class="recipe-details-container">
+                                        <li>Serves {{recipe.numberOfServings}}</li>
+                                        <li><span class="material-icons mat-time-icon">access_time</span> {{recipe.cookingTime}} min</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </ng-template>
+                </owl-carousel-o>
+                <!-- <mat-list class="list-horizontal">
+                    <mat-list-item class="mat-grid-recipe-tile" *ngFor="let recipe of recipeList | filter: searchText">
+                        <div class="mat-recipe-tile shadow-custom" (click)="openRecipe(recipe);snav.toggle();">
+                            <div class="tile-recipe-img">
+                                <img [src]=recipe.imgSrc>
+                            </div>
+                            <div class="tile-recipe-name-all">
                                 {{recipe.name}}
                             </div>
-                            <div class="tile-recipe-details">
+                            <div class="tile-recipe-details-all">
                                 <ul class="recipe-details-container">
                                     <li>Serves {{recipe.numberOfServings}}</li>
                                     <li><span class="material-icons mat-time-icon">access_time</span> {{recipe.cookingTime}} min</li>
                                 </ul>
                             </div>
                         </div>
+                    </mat-list-item>
+                </mat-list> -->
+            </div>
+            <div class="recipe-cuisine" *ngFor="let cuisine of recipeCuisines">
+                <h2>{{cuisine}}</h2>
+                <owl-carousel-o [options]="customOptions">
+                    <ng-template carouselSlide class="owl-recipe-item" *ngFor="let recipe of getRecipesByCuisine(cuisine)">
+                        <div class="mat-recipe-tile shadow-custom" (click)="openRecipe(recipe);snav.toggle();">
+                            <div class="tile-recipe-img">
+                                <img [src]=recipe.imgSrc>
+                            </div>
+                            <div class="tile-recipe-details-container">
+                                <div class="tile-recipe-name">
+                                    {{recipe.name}}
+                                </div>
+                                <div class="tile-recipe-details">
+                                    <ul class="recipe-details-container">
+                                        <li>Serves {{recipe.numberOfServings}}</li>
+                                        <li><span class="material-icons mat-time-icon">access_time</span> {{recipe.cookingTime}} min</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </ng-template>
+                </owl-carousel-o>
+                <!-- <mat-grid-list [cols]=5 rowHeight="1:1" (window:resize)="onResize($event)">
+                    <mat-grid-tile class="mat-grid-recipe-tile" *ngFor="let recipe of getRecipesByCuisine(cuisine)">
+                        <div class="mat-recipe-tile shadow-custom" (click)="openRecipe(recipe);snav.toggle();">
+                            <div class="tile-recipe-img">
+                                <img [src]=recipe.imgSrc>
+                            </div>
+                            <div class="tile-recipe-details-container">
+                                <div class="tile-recipe-name">
+                                    {{recipe.name}}
+                                </div>
+                                <div class="tile-recipe-details">
+                                    <ul class="recipe-details-container">
+                                        <li>Serves {{recipe.numberOfServings}}</li>
+                                        <li><span class="material-icons mat-time-icon">access_time</span> {{recipe.cookingTime}} min</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </mat-grid-tile>
-                </mat-grid-list>
+                </mat-grid-list> -->
             </div>
         </mat-sidenav-content>
     </mat-sidenav-container>

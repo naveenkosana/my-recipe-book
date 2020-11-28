@@ -1,9 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+
 html, body { height: 100%; }
 body { 
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
     background-color: #e6e6e6;
 }
+
+.owl-prev, .owl-next {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    display: block !important;
+    border:0px solid black;
+    color:#000
+  }
+  .owl-prev { left: -20px; }
+  .owl-next { right: -20px; }
+  .owl-prev span, .owl-next span {transform : scale(2,5); color: #000; position:absolute; top:40px; right:0px;}
+
+  .owl-carousel .owl-item {
+      width:14vw !important;
+  }

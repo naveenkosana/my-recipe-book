@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 import { RecipeDetailComponent } from '../recipe-detail/recipe-detail.component';
 import { Recipe } from '../recipe';
 import { RecipeListService } from '../recipe-list.service';
@@ -33,6 +34,34 @@ export class RecipeContentComponent implements OnInit, OnDestroy {
   };
   private recipeSubscription = [];
   selectedRecipe: Recipe = this.newRecipe;
+  searchText: string = ''
+
+  customOptions: OwlOptions = {
+    loop: false,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: [`<span class="material-icons">keyboard_arrow_left</span>`, `<span class="material-icons">
+    keyboard_arrow_right
+    </span>`],
+    responsive: {
+      0: {
+        items: 5
+      },
+      400: {
+        items: 5
+      },
+      740: {
+        items: 5
+      },
+      940: {
+        items: 6
+      }
+    },
+    nav: true
+  }
 
   ngOnInit(): void {
     this.recipeSubscription.push(this._recipeListService.getRecipesList().subscribe(

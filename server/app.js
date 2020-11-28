@@ -9,8 +9,8 @@ var jsonParser = bodyParser.json();
 
 app.use(cors());
 
-var fileUrl = 'server/assets/recipes.json';
-var recipeRawData = fs.readFileSync('server/assets/recipes.json');
+var fileUrl = 'assets/recipes.json';
+var recipeRawData = fs.readFileSync('assets/recipes.json');
 var recipeData = JSON.parse(recipeRawData);
 
 
