@@ -63,7 +63,7 @@
 
 #wrap {
     position: absolute;
-    top: 50%;
+    bottom: 0;
     right: 10%;
 }
 .steam {
@@ -119,7 +119,7 @@
   }
   
   #cup {
-    z-index: 1;
+    z-index: 0;
   }
   
   #cup-body {

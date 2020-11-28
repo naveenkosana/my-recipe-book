@@ -1,4 +1,11 @@
-<button mat-raised-button color="primary" type="button" (click)="editRecipe()">Edit Recipe</button>
+<div class="button-container">
+  <div class="edit-btn" *ngIf="!isEditMode">
+    <button mat-raised-button color="primary" type="button" (click)="editRecipe()">Edit Recipe</button>
+  </div>
+  <div class="delete-btn" *ngIf="selectedRecipe.id != -99">
+    <button mat-raised-button color="warn" type="button" (click)="deleteRecipe()">Delete Recipe</button>
+  </div>
+</div>
 <br>
 <div class="recipe-detail-normal" *ngIf="!isEditMode">
   <div class="recipe-field">
@@ -26,11 +33,11 @@
   </div> -->
   <div class="recipe-field">
     <span class="recipe-label">Ingredients: </span><br>
-    <span class="recipe-label-value">{{selectedRecipe.ingredients}}</span>
+    <span class="recipe-label-value recipe-info-newline" >{{selectedRecipe.ingredients}}</span>
   </div><br>
   <div class="recipe-field">
     <span class="recipe-label">Preparation Steps: </span><br>
-    <span class="recipe-label-value">{{selectedRecipe.preparationSteps}}</span>
+    <span class="recipe-label-value recipe-info-newline">{{selectedRecipe.preparationSteps}}</span>
   </div><br>
 </div>
 
@@ -59,6 +66,67 @@
           <span *ngIf="recipeForm.controls.numberOfServings.errors.required">This field is mandatory.</span>
         </mat-error> -->
       </mat-form-field><br>
+      <!-- <div class="columns">
+        <div class="column is-one-third">
+          <div class="field">
+            <div class="file has-name is-primary is-fullwidth">
+              <label class="file-label">
+                <input
+                  class="file-input"
+                  type="file"
+                  name="file"
+                  #fileInput
+                  (change)="onChange(fileInput.files[0])"
+                />
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <fa-icon [icon]="['fas', 'upload']"></fa-icon>
+                  </span>
+                  <span class="file-label">
+                    Choose a file…
+                  </span>
+                </span>
+                <span class="file-name">
+                  {{ fileName }}
+                </span>
+              </label>
+            </div>
+          </div>
+      
+          <article class="message" *ngIf="infoMessage">
+            <div class="message-body">
+              {{ infoMessage }}
+            </div>
+          </article>
+      
+          <div class="field" *ngIf="!infoMessage">
+            <div class="control">
+              <progress
+                class="progress is-primary"
+                [attr.value]="progress"
+                max="100"
+              ></progress>
+            </div>
+          </div>
+      
+          <div class="field">
+            <div class="control">
+              <button
+                class="button is-primary"
+                (click)="onUpload()"
+                [attr.disabled]="isUploading ? '' : null"
+              >
+                Upload
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <figure class="image is-128x128">
+            <img [src]="imageUrl" width="128px" height="128px" />
+          </figure>
+        </div>
+      </div> -->
       <mat-form-field class="form-field" appearance="standard">
         <mat-label>Cooking Time</mat-label>
         <input matInput  formControlName="cookingTime">

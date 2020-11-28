@@ -81,3 +81,12 @@
   }
 
     /*** CSS for Recipes Sidenav - end***/
+
+    .tile-recipe-name{
+      font-size:1.3vw;
+      font-weight: bold;
+    }
+
+    .tile-recipe-details{
+      font-size:1vw;
+    }

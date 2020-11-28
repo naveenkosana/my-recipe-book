@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
     Scroll function - To detect Scroll button click on home page and move to next section
   */
   scroll(el: HTMLElement) {
+    console.log("Scrolled");
     this.scrollButtonEnable = false;
     el.scrollIntoView({behavior:"smooth"});
   }
