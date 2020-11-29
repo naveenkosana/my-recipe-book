@@ -31,9 +31,9 @@ export class RecipeContentComponent implements OnInit, OnDestroy, AfterViewInit 
       id:-99,
       name:'',
       cuisine: '',
-      numberOfServings:0,
+      numberOfServings:undefined,
       imgSrc:'../../assets/food.jpg',
-      cookingTime:0,
+      cookingTime:undefined,
       ingredients:'',
       preparationSteps:''
   };

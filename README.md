@@ -2,6 +2,8 @@
 
 Welcome to the Recipe Book application. A one stop shop to explore different cuisines and their secret recipes! You can view, edit and even create new recipes in this application and help other people know about the secret chef in you!!
 
+New Feature in progress - User will soon be able to uploading their favourite images for their recipes.
+
 How to run this application?
 ## Development server
 

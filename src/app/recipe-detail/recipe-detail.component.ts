@@ -64,10 +64,11 @@ export class RecipeDetailComponent implements OnInit, OnChanges {
 
   /*
     Save the newly added / updated recipe and send it to the parent component as an event to store it in the recipe list
-    Validations: In Progress
   */
-  saveRecipe(){
-    var updatedRecipe = this.recipeForm.value;
+  saveRecipe(recipeForm){
+    console.log(this.recipeForm.valid);
+    if(this.recipeForm.valid){
+      var updatedRecipe = this.recipeForm.value;
     this.updatedRecipe = {
       id: this.selectedRecipe.id,
       name: updatedRecipe.name,
@@ -104,6 +105,10 @@ export class RecipeDetailComponent implements OnInit, OnChanges {
       console.log(error);
     })
   }
+    }
+    else{
+      console.log("Invalid inputs");
+    }
   }
 
   /*

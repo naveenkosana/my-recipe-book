@@ -5,10 +5,10 @@
     </button>
   </div>
   <div class="edit-btn" *ngIf="selectedRecipe.id != -99">
-    <button mat-raised-button color="primary" type="button" (click)="!isEditMode?editRecipe():cancelForm()">{{isEditMode?'Cancel':'Edit Recipe'}}</button>
+    <button mat-raised-button color="{{isEditMode?'basic':'primary'}}" type="button" (click)="!isEditMode?editRecipe():cancelForm()">{{isEditMode?'Cancel':'Edit Recipe'}}</button>
   </div>
   <div class="save-btn" *ngIf="isEditMode">
-    <button mat-raised-button color="primary" type="button" (click)="saveRecipe()">Save Recipe</button>
+    <button mat-raised-button color="primary" type="button" (click)="saveRecipe(recipeForm.value)">Save Recipe</button>
   </div>
   <div class="delete-btn" *ngIf="selectedRecipe.id != -99">
     <!-- <button mat-raised-button color="warn" type="button" (click)="deleteRecipe()">Delete Recipe</button> -->
@@ -50,19 +50,19 @@
     <form [formGroup]="recipeForm">
       <mat-form-field class="form-field" appearance="standard">
         <mat-label>Recipe Name</mat-label>
-        <input matInput  formControlName="name">
+        <input matInput  formControlName="name" required>
       </mat-form-field><br>
       <mat-form-field class="form-field" appearance="standard">
         <mat-label>Cuisine</mat-label>
-        <input matInput  formControlName="cuisine">
+        <input matInput  formControlName="cuisine" required>
       </mat-form-field><br>
       <mat-form-field class="form-field" appearance="standard">
         <mat-label>Number of Servings</mat-label>
-        <input matInput  formControlName="numberOfServings">
+        <input matInput type="number" formControlName="numberOfServings" required>
       </mat-form-field><br>
       <mat-form-field class="form-field" appearance="standard">
-        <mat-label>Cooking Time</mat-label>
-        <input matInput  formControlName="cookingTime">
+        <mat-label>Cooking Time (in minutes)</mat-label>
+        <input matInput type="number" formControlName="cookingTime" required>
       </mat-form-field><br>
       <mat-form-field class="form-field" appearance="standard">
         <mat-label>Ingredients</mat-label>
