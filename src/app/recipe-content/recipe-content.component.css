@@ -1,14 +1,26 @@
 /*** CSS for Recipes view - start ***/
-.recipes{
-    /* padding-left:5%; */
-    /* margin-right: 5%; */
-}
 
 .all-recipes{
   padding-bottom:7vh;
 }
 
-.recipe-filter{
+.search-field {
+  width:30vw;
+  top: 1vh;
+}
+
+.new-btn{
+  position: absolute;
+  left:4vw;
+  top:2vh;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.recipe-options{
   display: flex;
   justify-content: space-around;
 }
@@ -127,4 +139,8 @@
 
     .tile-recipe-details-all{
       font-size:0.8vw;
+    }
+
+    .all-recipes h2, .recipe-cuisine h2 {
+      font-weight: bold;
     }

@@ -1,9 +1,20 @@
 <div class="button-container">
-  <div class="edit-btn" *ngIf="!isEditMode">
-    <button mat-raised-button color="primary" type="button" (click)="editRecipe()">Edit Recipe</button>
+  <div class="close-btn">
+    <button mat-icon-button color="basic" (click)="closeSideNav()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="edit-btn" *ngIf="selectedRecipe.id != -99">
+    <button mat-raised-button color="primary" type="button" (click)="!isEditMode?editRecipe():cancelForm()">{{isEditMode?'Cancel':'Edit Recipe'}}</button>
+  </div>
+  <div class="save-btn" *ngIf="isEditMode">
+    <button mat-raised-button color="primary" type="button" (click)="saveRecipe()">Save Recipe</button>
   </div>
   <div class="delete-btn" *ngIf="selectedRecipe.id != -99">
-    <button mat-raised-button color="warn" type="button" (click)="deleteRecipe()">Delete Recipe</button>
+    <!-- <button mat-raised-button color="warn" type="button" (click)="deleteRecipe()">Delete Recipe</button> -->
+    <button mat-mini-fab color="warn" (click)="openDialog()">
+      <mat-icon>delete</mat-icon>
+    </button>
   </div>
 </div>
 <br>
@@ -23,14 +34,6 @@
     <span class="recipe-label">Cooking Time: </span>
     <span class="recipe-label-value">{{selectedRecipe.cookingTime}}min</span>
   </div>
-  <!-- <div class="recipe-field">
-    <span class="recipe-label">Ingredients: </span>
-    <div class="recipe-ingredients">
-      <ul>
-        <li *ngFor="let ingredient of selectedRecipe.ingredients">{{ingredient}}</li>
-      </ul>
-    </div>
-  </div> -->
   <div class="recipe-field">
     <span class="recipe-label">Ingredients: </span><br>
     <span class="recipe-label-value recipe-info-newline" >{{selectedRecipe.ingredients}}</span>
@@ -44,95 +47,22 @@
 
 <div class="recipe-detail-form" *ngIf="isEditMode">
   <div class="form-container">
-    <form [formGroup]="recipeForm" (submit)="saveRecipe(recipeForm.value)">
+    <form [formGroup]="recipeForm">
       <mat-form-field class="form-field" appearance="standard">
         <mat-label>Recipe Name</mat-label>
         <input matInput  formControlName="name">
-        <!-- <mat-error *ngIf="recipeForm.controls.recipeName.touched">
-          <span *ngIf="recipeForm.controls.recipeName.errors.required">This field is mandatory.</span>
-        </mat-error> -->
       </mat-form-field><br>
       <mat-form-field class="form-field" appearance="standard">
         <mat-label>Cuisine</mat-label>
         <input matInput  formControlName="cuisine">
-        <!-- <mat-error *ngIf="recipeForm.controls.cuisine.touched">
-          <span *ngIf="recipeForm.controls.cuisine.errors.required">This field is mandatory.</span>
-        </mat-error> -->
       </mat-form-field><br>
       <mat-form-field class="form-field" appearance="standard">
         <mat-label>Number of Servings</mat-label>
         <input matInput  formControlName="numberOfServings">
-        <!-- <mat-error *ngIf="recipeForm.controls.numberOfServings.touched">
-          <span *ngIf="recipeForm.controls.numberOfServings.errors.required">This field is mandatory.</span>
-        </mat-error> -->
       </mat-form-field><br>
-      <!-- <div class="columns">
-        <div class="column is-one-third">
-          <div class="field">
-            <div class="file has-name is-primary is-fullwidth">
-              <label class="file-label">
-                <input
-                  class="file-input"
-                  type="file"
-                  name="file"
-                  #fileInput
-                  (change)="onChange(fileInput.files[0])"
-                />
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <fa-icon [icon]="['fas', 'upload']"></fa-icon>
-                  </span>
-                  <span class="file-label">
-                    Choose a file…
-                  </span>
-                </span>
-                <span class="file-name">
-                  {{ fileName }}
-                </span>
-              </label>
-            </div>
-          </div>
-      
-          <article class="message" *ngIf="infoMessage">
-            <div class="message-body">
-              {{ infoMessage }}
-            </div>
-          </article>
-      
-          <div class="field" *ngIf="!infoMessage">
-            <div class="control">
-              <progress
-                class="progress is-primary"
-                [attr.value]="progress"
-                max="100"
-              ></progress>
-            </div>
-          </div>
-      
-          <div class="field">
-            <div class="control">
-              <button
-                class="button is-primary"
-                (click)="onUpload()"
-                [attr.disabled]="isUploading ? '' : null"
-              >
-                Upload
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <figure class="image is-128x128">
-            <img [src]="imageUrl" width="128px" height="128px" />
-          </figure>
-        </div>
-      </div> -->
       <mat-form-field class="form-field" appearance="standard">
         <mat-label>Cooking Time</mat-label>
         <input matInput  formControlName="cookingTime">
-        <!-- <mat-error *ngIf="recipeForm.controls.cookingTime.touched">
-          <span *ngIf="recipeForm.controls.cookingTime.errors.required">This field is mandatory.</span>
-        </mat-error> -->
       </mat-form-field><br>
       <mat-form-field class="form-field" appearance="standard">
         <mat-label>Ingredients</mat-label>
@@ -142,7 +72,17 @@
         <mat-label>Preparation Steps</mat-label>
         <textarea matInput rows="3" formControlName="preparationSteps"></textarea>
       </mat-form-field><br>
-      <button mat-raised-button color="primary" type="submit">Save Recipe</button>
+      <!-- <button mat-raised-button color="primary" type="submit">Save Recipe</button> -->
     </form>
   </div>
 </div>
+
+<ng-template #deleteDialog>
+<div mat-dialog-content>
+  <p>Are you sure you want to delete the recipe?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button cdkFocusInitial (click)="deleteRecipe()">Yes</button>
+  <button mat-button (click)="dialog.closeAll()">No</button>
+</div>
+</ng-template>

@@ -1,17 +1,20 @@
 <div class="recipes">
     <mat-sidenav-container class="recipe-container">
         <mat-sidenav #snav class="recipe-sidenav" fixedInViewport="true" mode="over" position="end">
-            <app-recipe-detail [selectedRecipe]="selectedRecipe" (recipeUpdated)="addOrUpdateRecipe($event)"></app-recipe-detail>
+            <app-recipe-detail [selectedRecipe]="selectedRecipe" (refreshRecipeList)="getRecipeList()" (recipeUpdated)="addOrUpdateRecipe($event)"></app-recipe-detail>
         </mat-sidenav>
         <mat-sidenav-content class="recipe-sidenav-content">
             <div class="recipe-options">
                 <div class="recipe-filter">
-                    <mat-form-field appearance="outline">
+                    <div class="new-btn">
+                        <button mat-raised-button color="primary" (click)="openNewRecipe();snav.toggle();">Add a new Recipe</button>
+                    </div>                    
+                    <mat-form-field class="search-field" color="primary" appearance="outline">
                         <mat-label>Search Recipes</mat-label>
                         <input matInput [(ngModel)]="searchText" placeholder="Search for a recipe">
                         <mat-icon matSuffix>search</mat-icon>
                     </mat-form-field>
-                    <button mat-raised-button color="primary" (click)="openNewRecipe();snav.toggle();">Add a new Recipe</button>
+                    
                 </div>
         
             </div>
@@ -38,24 +41,6 @@
                         </div>
                     </ng-template>
                 </owl-carousel-o>
-                <!-- <mat-list class="list-horizontal">
-                    <mat-list-item class="mat-grid-recipe-tile" *ngFor="let recipe of recipeList | filter: searchText">
-                        <div class="mat-recipe-tile shadow-custom" (click)="openRecipe(recipe);snav.toggle();">
-                            <div class="tile-recipe-img">
-                                <img [src]=recipe.imgSrc>
-                            </div>
-                            <div class="tile-recipe-name-all">
-                                {{recipe.name}}
-                            </div>
-                            <div class="tile-recipe-details-all">
-                                <ul class="recipe-details-container">
-                                    <li>Serves {{recipe.numberOfServings}}</li>
-                                    <li><span class="material-icons mat-time-icon">access_time</span> {{recipe.cookingTime}} min</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </mat-list-item>
-                </mat-list> -->
             </div>
             <div class="recipe-cuisine" *ngFor="let cuisine of recipeCuisines">
                 <h2>{{cuisine}}</h2>
@@ -80,26 +65,6 @@
                         </div>
                     </ng-template>
                 </owl-carousel-o>
-                <!-- <mat-grid-list [cols]=5 rowHeight="1:1" (window:resize)="onResize($event)">
-                    <mat-grid-tile class="mat-grid-recipe-tile" *ngFor="let recipe of getRecipesByCuisine(cuisine)">
-                        <div class="mat-recipe-tile shadow-custom" (click)="openRecipe(recipe);snav.toggle();">
-                            <div class="tile-recipe-img">
-                                <img [src]=recipe.imgSrc>
-                            </div>
-                            <div class="tile-recipe-details-container">
-                                <div class="tile-recipe-name">
-                                    {{recipe.name}}
-                                </div>
-                                <div class="tile-recipe-details">
-                                    <ul class="recipe-details-container">
-                                        <li>Serves {{recipe.numberOfServings}}</li>
-                                        <li><span class="material-icons mat-time-icon">access_time</span> {{recipe.cookingTime}} min</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </mat-grid-tile>
-                </mat-grid-list> -->
             </div>
         </mat-sidenav-content>
     </mat-sidenav-container>

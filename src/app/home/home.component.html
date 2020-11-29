@@ -1,5 +1,5 @@
 <!-- <app-navigation></app-navigation> -->
-<div class="home-body" (scroll)="scroll(viewRecipes)">
+<div class="home-body">
     
     <!-- <button mat-raised-button color="primary">Create Recipe</button> -->
     <h1 class="home-title">{{title}}</h1>
@@ -20,7 +20,7 @@
         
         <div id="shadow"></div>
       </div>
-<div class="scroll-down" *ngIf="scrollButtonEnable">
+<div class="scroll-down" *ngIf="scrollButtonEnable && !scrolled">
     <img src="./../../assets/pizza-slice.png" alt="Scroll Down" (click)="scroll(viewRecipes)" height="50px" width="50px" />
 </div>
 </div>

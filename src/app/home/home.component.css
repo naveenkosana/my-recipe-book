@@ -29,7 +29,7 @@
 
 /*** Styles for Scroll button - Start***/
 .scroll-down {
-    position: fixed;
+    position: absolute;
     margin: auto;
     bottom: 1.25rem;
     left:0;
@@ -38,6 +38,7 @@
     flex-flow: row;
     justify-content: center;
     align-items: center;
+    z-index:2;
 }
 
 .scroll-down img{
@@ -172,7 +173,7 @@ background: linear-gradient(to right, #99f2c8, #1f4037); /* W3C, IE 10+/ Edge, F
     background-color: #78dbe8;
     margin-top: -32px;
     margin-left: 5px;
-    z-index: 2;
+    z-index: 1;
   }
   
   #shadow {

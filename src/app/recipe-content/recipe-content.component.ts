@@ -1,10 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { RecipeDetailComponent } from '../recipe-detail/recipe-detail.component';
+import {MatSidenav} from '@angular/material/sidenav';
 import { Recipe } from '../recipe';
-import { RecipeListService } from '../recipe-list.service';
+import { RecipeListService } from '../services/recipe-list.service';
+import { SidenavService } from '../services/sidenav.service';
 
 
 @Component({
@@ -15,10 +17,13 @@ import { RecipeListService } from '../recipe-list.service';
 
 
 
-export class RecipeContentComponent implements OnInit, OnDestroy {
+export class RecipeContentComponent implements OnInit, OnDestroy, AfterViewInit {
+
+  @ViewChild('snav') public snav: MatSidenav;
 
   constructor(public dialog: MatDialog,
-    private _recipeListService: RecipeListService) { }
+    private _recipeListService: RecipeListService,
+    private _sideNavService: SidenavService) { }
 
   recipeList :Recipe[];
   recipeCuisines: any[];
@@ -64,36 +69,35 @@ export class RecipeContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.recipeSubscription.push(this._recipeListService.getRecipesList().subscribe(
-      data => {
-        this.recipeList = data;
-        // console.log(JSON.stringify(this.recipeList));
-        this.recipeCuisines = [...new Set(this.recipeList.map(recipe => recipe.cuisine))]; //store all the cuisine values in an array
-      },
-      error => {
-        console.log(error);
-      }
-    ));
-
-    
+    this.getRecipeList();    
   }
+
+  ngAfterViewInit(){
+    this._sideNavService.setSidenav(this.snav);
+  }
+
 
   /*
-  Function to adjust the no of recipes to show based on window size (Under Progress)
+    Function to get the recipe List
   */
-  onResize(event){
+ getRecipeList(){
+  this.recipeSubscription.push(this._recipeListService.getRecipesList().subscribe(
+    data => {
+      this.recipeList = data;
+      this.recipeCuisines = [...new Set(this.recipeList.map(recipe => recipe.cuisine))]; //store all the cuisine values in an array
+    },
+    error => {
+      console.log(error);
+    }
+  ));
+ }
 
-  }
 
   /*
   Function to open a side bar to view/edit recipe
   */
   openRecipe(recipe: Recipe){
-    // this.dialog.open(RecipeDetailComponent, {
-    //   data:recipe
-    // });
     this.selectedRecipe = recipe;
-    console.log(JSON.stringify(this.selectedRecipe));
   }
 
   /*
@@ -122,7 +126,6 @@ export class RecipeContentComponent implements OnInit, OnDestroy {
     else{
       this.recipeList[this.recipeList.indexOf(this.recipeList.find(item => item.id == updatedRecipe.id))] = updatedRecipe;
     }
-    console.log(JSON.stringify(this.recipeList));
   }
 
   ngOnDestroy():void {
